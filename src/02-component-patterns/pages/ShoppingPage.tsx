@@ -16,7 +16,9 @@ export const ShoppingPage = () => {
                 flexDirection: "row",
                 flexWrap: "wrap"
             }}>
-                <ProductCard product={product}/>
+                <ProductCard product={product}>
+                
+                </ProductCard>
             </div>
         </div>
     )
