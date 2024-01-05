@@ -1,63 +1,26 @@
+import { createContext } from "react"
+
 import { useProduct } from "../hooks/useProduct"
 
+import { ProductCardProps, ProductContextProps } from "../interfaces/interfaces";
+
+
 import styles from "../styles/styles.module.css"
-import noImage from "../assets/no-image.jpg"
 
-interface Props {
-    product: Product
-}
+// Contexto que se comporte con todos los componentes hijos
+export const ProductContext = createContext({} as ProductContextProps);
+const { Provider } = ProductContext;
 
-interface Product {
-    id: string,
-    title: string,
-    image?: string
-}
-
-interface ProductButtonsProps {
-    counter: number,
-    increaseBy: (value: number) => void
-}
-
-export const ProductImage = ({ img = '' }) => {
-    return (
-        <img className={styles.productImg} src={img ? img : noImage} alt="Product Image" />
-    )
-}
-
-export const ProductTitle = ({ title }: { title: string }) => {
-    return (
-        <span className={styles.productDescription}>{title}</span>
-    )
-}
-
-export const ProductButtons = ({ counter, increaseBy }: ProductButtonsProps) => {
-    return (
-        <div className={styles.buttonsContainer}>
-            <button
-                className={styles.buttonMinus}
-                onClick={() => increaseBy(-1)}>-</button>
-
-            <div className={styles.countLabel}>{counter}</div>
-
-            <button
-                className={styles.buttonAdd}
-                onClick={() => increaseBy(1)}>+</button>
-        </div>
-    )
-}
-
-export const ProductCard = ({ product }: Props) => {
+export const ProductCard = ({ children, product }: ProductCardProps) => {
 
     const { counter, increaseBy } = useProduct();
 
     return (
-        <div className={styles.productCard}>
+        <Provider value={{ counter, increaseBy, product }}>
 
-            <ProductImage img={product.image} />
-
-            <ProductTitle title={product.title} />
-
-            <ProductButtons counter={counter} increaseBy={increaseBy} />
-        </div>
+            <div className={styles.productCard}>
+                {children}
+            </div>
+        </Provider>
     )
 }
