@@ -4,7 +4,7 @@ export interface ProductCardProps {
     children?: ReactElement | ReactElement[],
     className?: string,
     product: Product,
-    style?: CSSProperties
+    style?: CSSProperties // allow to work with CSSProperties
 }
 
 export interface Product {
@@ -15,19 +15,19 @@ export interface Product {
 
 export interface ProductTitleProps {
     className?: string,
-    style?: CSSProperties,
+    style?: CSSProperties, // allow to work with CSSProperties
     title?: string,
 }
 
 export interface ProductImageProps {
     className?: string,
     img?: string,
-    style?: CSSProperties
+    style?: CSSProperties // allow to work with CSSProperties
 }
 
 export interface ProductButtonsProps {
     className?: string,
-    style?: CSSProperties
+    style?: CSSProperties // allow to work with CSSProperties
 }
 
 export interface ProductContextProps {
