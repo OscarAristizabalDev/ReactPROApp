@@ -1,26 +1,45 @@
-import { ReactElement } from "react"
+import { CSSProperties, ReactElement } from "react"
 
 export interface ProductCardProps {
+    children?: ReactElement | ReactElement[],
+    className?: string,
     product: Product,
-    children?: ReactElement | ReactElement[]
+    style?: CSSProperties
 }
 
 export interface Product {
     id: string,
+    image?: string,
     title: string,
-    image?: string
+}
+
+export interface ProductTitleProps {
+    className?: string,
+    style?: CSSProperties,
+    title?: string,
+}
+
+export interface ProductImageProps {
+    className?: string,
+    img?: string,
+    style?: CSSProperties
+}
+
+export interface ProductButtonsProps {
+    className?: string,
+    style?: CSSProperties
 }
 
 export interface ProductContextProps {
     counter: number,
-    increaseBy: (value: number) => void,
     product: Product
+    increaseBy: (value: number) => void,
 }
 
 // Interface utilizado para el componente padre, se definen los componentes hijos
 export interface ProductCardHOCProps {
     ({ children, product }: ProductCardProps): JSX.Element,
-    Title: ({ title }: { title?: string }) => JSX.Element,
-    Image: ({ img }: { img?: string }) => JSX.Element,
-    Buttons: () => JSX.Element
+    Buttons: (Props: ProductButtonsProps) => JSX.Element
+    Image: (Props: ProductImageProps) => JSX.Element,
+    Title: (Props: ProductTitleProps) => JSX.Element,
 }
